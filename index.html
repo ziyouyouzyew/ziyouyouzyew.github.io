@@ -1,1 +1,50 @@
-<h1>hello world</h1>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>猜数字小游戏</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        input, button {
+            margin: 10px;
+            padding: 5px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>猜数字小游戏</h1>
+    <p>我已经想好了一个1到100之间的数字，你能猜到是多少吗？</p>
+    <input type="number" id="guessInput" min="1" max="100" placeholder="输入你的猜测">
+    <button onclick="checkGuess()">猜一下</button>
+    <p id="result"></p>
+
+    <script>
+        // 生成1到100之间的随机数
+        let randomNumber = Math.floor(Math.random() * 100) + 1;
+
+        function checkGuess() {
+            // 获取用户输入的数字
+            let userGuess = parseInt(document.getElementById('guessInput').value);
+            let resultText = document.getElementById('result');
+
+            if (userGuess < randomNumber) {
+                resultText.textContent = '你猜的数字小了！再试一次。';
+            } else if (userGuess > randomNumber) {
+                resultText.textContent = '你猜的数字大了！再试一次。';
+            } else if (userGuess === randomNumber) {
+                resultText.textContent = '恭喜你，猜对了！';
+                // 重新生成一个随机数，以便可以继续玩
+                randomNumber = Math.floor(Math.random() * 100) + 1;
+            } else {
+                resultText.textContent = '请输入一个有效的数字。';
+            }
+        }
+    </script>
+</body>
+</html>
